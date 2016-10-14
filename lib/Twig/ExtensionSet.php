@@ -50,6 +50,8 @@ final class Twig_ExtensionSet
 
         foreach ($this->extensions as $extension) {
             if ($extension instanceof Twig_Extension_InitRuntimeInterface) {
+                @trigger_error(sprintf('Implementing Twig_Extension_InitRuntimeInterface on %s is deprecated since version 2.1 as the interface will be removed in 3.0.', get_class($extension)), E_USER_DEPRECATED);
+
                 $extension->initRuntime($env);
             }
         }
@@ -426,16 +428,28 @@ final class Twig_ExtensionSet
     {
         // filters
         foreach ($extension->getFilters() as $filter) {
+            if ($filter instanceof Twig_SimpleFilter) {
+                @trigger_error(sprintf('The "%s" filter defined in "%s" is using the Twig_SimpleFilter class which is deprecated since version 2.1 and will be removed in 3.0. Use Twig_Filter instead.', $filter->getName(), get_class($extension)), E_USER_DEPRECATED);
+            }
+
             $this->filters[$filter->getName()] = $filter;
         }
 
         // functions
         foreach ($extension->getFunctions() as $function) {
+            if ($function instanceof Twig_SimpleFunction) {
+                @trigger_error(sprintf('The "%s" function defined in "%s" is using the Twig_SimpleFunction class which is deprecated since version 2.1 and will be removed in 3.0. Use Twig_Function instead.', $filter->getName(), get_class($extension)), E_USER_DEPRECATED);
+            }
+
             $this->functions[$function->getName()] = $function;
         }
 
         // tests
         foreach ($extension->getTests() as $test) {
+            if ($test instanceof Twig_SimpleTest) {
+                @trigger_error(sprintf('The "%s" test defined in "%s" is using the Twig_SimpleTest class which is deprecated since version 2.1 and will be removed in 3.0. Use Twig_Test instead.', $filter->getName(), get_class($extension)), E_USER_DEPRECATED);
+            }
+
             $this->tests[$test->getName()] = $test;
         }
 

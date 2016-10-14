@@ -286,12 +286,15 @@ class Twig_Tests_EnvironmentTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($twig->isTemplateFresh('page', time()));
     }
 
-    public function testInitRuntimeWithAnExtensionUsingInitRuntimeNoDeprecation()
+    /**
+     * @group legacy
+     */
+    public function testInitRuntimeWithAnExtensionUsingInitRuntime()
     {
         $loader = $this->getMockBuilder('Twig_LoaderInterface')->getMock();
         $twig = new Twig_Environment($loader);
         $loader->expects($this->once())->method('getSourceContext')->will($this->returnValue(new Twig_Source('', '')));
-        $twig->addExtension(new Twig_Tests_EnvironmentTest_ExtensionWithoutDeprecationInitRuntime());
+        $twig->addExtension(new Twig_Tests_EnvironmentTest_ExtensionInitRuntime());
 
         $twig->loadTemplate('');
     }
@@ -450,7 +453,7 @@ class Twig_Tests_EnvironmentTest_ExtensionWithDeprecationInitRuntime extends Twi
     }
 }
 
-class Twig_Tests_EnvironmentTest_ExtensionWithoutDeprecationInitRuntime extends Twig_Extension implements Twig_Extension_InitRuntimeInterface
+class Twig_Tests_EnvironmentTest_ExtensionInitRuntime extends Twig_Extension implements Twig_Extension_InitRuntimeInterface
 {
     public function initRuntime(Twig_Environment $env)
     {

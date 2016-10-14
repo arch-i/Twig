@@ -26,6 +26,10 @@ final class Twig_Extension_Staging extends Twig_Extension
 
     public function addFunction(Twig_Function $function)
     {
+        if ($function instanceof Twig_SimpleFunction) {
+            @trigger_error(sprintf('The "%s" function is defined using the Twig_SimpleFunction class which is deprecated since version 2.1 and will be removed in 3.0. Use Twig_Function instead.', $filter->getName()), E_USER_DEPRECATED);
+        }
+
         if (isset($this->functions[$function->getName()])) {
             throw new LogicException(sprintf('Function "%s" is already registered.', $function->getName()));
         }
@@ -40,6 +44,10 @@ final class Twig_Extension_Staging extends Twig_Extension
 
     public function addFilter(Twig_Filter $filter)
     {
+        if ($filter instanceof Twig_SimpleFilter) {
+            @trigger_error(sprintf('The "%s" filter is defined using the Twig_SimpleFilter class which is deprecated since version 2.1 and will be removed in 3.0. Use Twig_Filter instead.', $filter->getName()), E_USER_DEPRECATED);
+        }
+
         if (isset($this->filters[$filter->getName()])) {
             throw new LogicException(sprintf('Filter "%s" is already registered.', $filter->getName()));
         }
@@ -78,6 +86,10 @@ final class Twig_Extension_Staging extends Twig_Extension
 
     public function addTest(Twig_Test $test)
     {
+        if ($test instanceof Twig_SimpleTest) {
+            @trigger_error(sprintf('The "%s" test is defined using the Twig_SimplerTest class which is deprecated since version 2.1 and will be removed in 3.0. Use Twig_Test instead.', $filter->getName()), E_USER_DEPRECATED);
+        }
+
         if (isset($this->tests[$test->getName()])) {
             throw new LogicException(sprintf('Test "%s" is already registered.', $test->getTag()));
         }

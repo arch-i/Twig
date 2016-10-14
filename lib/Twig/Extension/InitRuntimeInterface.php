@@ -16,6 +16,8 @@
  * deprecated initRuntime() method in your extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated to be removed in 3.0
  */
 interface Twig_Extension_InitRuntimeInterface
 {

@@ -11,6 +11,8 @@
 
 /**
  * Empty interface for Twig 1.x compatibility.
+ *
+ * @deprecated to be removed in 3.0
  */
 interface Twig_ExistsLoaderInterface extends Twig_LoaderInterface
 {

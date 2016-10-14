@@ -11,6 +11,8 @@
 
 /**
  * Empty class for Twig 1.x compatibility.
+ *
+ * @deprecated to be removed in 3.0
  */
 final class Twig_SimpleFunction extends Twig_Function
 {
